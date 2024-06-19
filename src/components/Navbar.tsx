@@ -1,34 +1,28 @@
+import Link from "next/link";
 import React from "react";
+import { FaTicketAlt } from "react-icons/fa";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <div className="navbar bg-base-100">
+    <nav className="navbar sticky z-50 bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Ticketing</a>
+        <Link href={`/`} className="text-2xl font-semibold">
+          <span className="flex gap-2 items-center">
+            {" "}
+            Ticketing <FaTicketAlt />
+          </span>
+        </Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Link</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2 bg-base-100 rounded-t-none">
-                <li>
-                  <a>Link 1</a>
-                </li>
-                <li>
-                  <a>Link 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
+          <Link href={`/ticket-page/new`}>
+            <button className="btn btn-custom">Tickets</button>
+          </Link>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

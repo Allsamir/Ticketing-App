@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-custom {
+    @apply text-default-text hover:no-underline hover:bg-blue-accent-hover bg-blue-accent tracking-wide;
+  }
+}
