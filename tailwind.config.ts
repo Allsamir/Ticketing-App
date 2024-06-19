@@ -10,9 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         nav: "#18222f",
-        page: "#2b3441",
-        card: "#47566a",
-        "card-hover": "#4f5e74",
+        card: "#18222f",
+        "card-hover": "#fff",
         "default-text": "#f1f3f5",
         "blue-accent": "#0084d4",
         "blue-accent-hover": "#009fff",
