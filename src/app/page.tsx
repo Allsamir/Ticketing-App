@@ -3,9 +3,12 @@ import Ticket from "@/interface/TicketInterface";
 
 const getAllTheTickets = async () => {
   try {
-    const res = await fetch(`http:localhost:3000/api/tickets`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://ticketing-js7p6pvfu-allsamirs-projects.vercel.app/api/tickets`,
+      {
+        cache: "no-store",
+      },
+    );
     return res.json();
   } catch (error) {
     console.log(error);
@@ -31,8 +34,8 @@ export default async function Home() {
       {Object.entries(groupedTickets).map(
         ([category, tickets], index: number) => (
           <>
-            <h2 className="m-2" key={index}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+            <h2 className="m-2 capitalize" key={index}>
+              {category}
             </h2>
             <div
               key={index}
