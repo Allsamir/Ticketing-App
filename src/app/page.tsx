@@ -12,15 +12,38 @@ const getAllTheTickets = async () => {
   }
 };
 
+const groupTicketByCategory = (tickets: Ticket[]) => {
+  return tickets.reduce((acc: { [key: string]: Ticket[] }, ticket: Ticket) => {
+    const category = ticket.category || "Uncategorized";
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(ticket);
+    return acc;
+  }, {});
+};
+
 export default async function Home() {
   const { tickets } = await getAllTheTickets();
+  const groupedTickets = groupTicketByCategory(tickets);
+  console.log(Object.entries(groupedTickets));
   return (
     <main>
-      <div className="gap-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
-        {tickets?.map((ticket: Ticket, index: number) => (
-          <TicketCard ticket={ticket} key={index} />
-        ))}
-      </div>
+      {Object.entries(groupedTickets).map(([category, tickets]) => (
+        <>
+          <h2 className="m-2">
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </h2>
+          <div
+            key={category}
+            className="gap-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
+          >
+            {tickets.map((ticket: Ticket, index: number) => (
+              <TicketCard ticket={ticket} key={index} />
+            ))}
+          </div>
+        </>
+      ))}
     </main>
   );
 }
