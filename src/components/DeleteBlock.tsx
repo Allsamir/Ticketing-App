@@ -1,8 +1,9 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
+import { Modal } from "antd";
 
 type Props = {
   _id: string;
@@ -10,6 +11,7 @@ type Props = {
 
 const DeleteBlock = (props: Props) => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const deleteTicket = async () => {
     const res = await axios.delete(
       `http://localhost:3000/api/tickets/${props._id}`,
@@ -18,12 +20,40 @@ const DeleteBlock = (props: Props) => {
       router.refresh();
     }
   };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    deleteTicket();
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div>
       <TiDelete
         className="text-red-600 hover:text-red-400 text-3xl cursor-pointer"
-        onClick={deleteTicket}
+        onClick={showModal}
       />
+      <Modal
+        title="Delete Ticket"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Delete"
+        cancelText="Cancel"
+        className="text-center"
+        styles={{
+          footer: {
+            textAlign: "center",
+          },
+        }}
+      >
+        <p className="text-xl font-bold text-black my-8">Are You Sure ?</p>
+      </Modal>
     </div>
   );
 };
