@@ -12,8 +12,7 @@ const defaultTicket: Ticket = {
   description: "",
   priority: 1,
   status: "not started",
-  active: true,
-  category: "",
+  category: "any problem",
   progress: 0,
 };
 
@@ -34,7 +33,6 @@ const TicketPage = async ({ params }: { params: { id: string } }) => {
   if (EDITMODE) {
     const data = await getDataToUpdate(params.id);
     updateData = data.ticket;
-    console.log(updateData);
   } else {
     updateData = defaultTicket;
   }

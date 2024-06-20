@@ -10,14 +10,7 @@ type Props = {
 const TicketForm = ({ updateTicketData }: Props) => {
   const EDITMODE = updateTicketData._id !== "new";
   const router = useRouter();
-  const startingData: Ticket = {
-    title: "",
-    description: "",
-    priority: 1,
-    status: "not started",
-    progress: 0,
-    category: "Hello",
-  };
+  const startingData: Ticket = updateTicketData;
   if (EDITMODE) {
     startingData.title = updateTicketData.title;
     startingData.description = updateTicketData.description;
@@ -42,17 +35,47 @@ const TicketForm = ({ updateTicketData }: Props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      await axios
-        .post(`/api/tickets`, {
-          formData,
-        })
-        .then((res) => {
-          if (res.statusText !== "Created") {
-            throw new Error("Failed to create tickets");
-          }
-          console.log(res);
-          router.push("/");
-        });
+      if (EDITMODE) {
+        await axios
+          .put(`/api/tickets/${updateTicketData._id}`, {
+            formData: {
+              title: formData.title,
+              description: formData.description,
+              priority: formData.priority,
+              status: formData.status,
+              active: formData.active,
+              category: formData.category,
+              progress: formData.progress,
+            },
+          })
+          .then((res) => {
+            if (res.statusText !== "OK") {
+              throw new Error("Failed to update tickets");
+            }
+            console.log(res);
+            router.push("/");
+          });
+      } else {
+        await axios
+          .post(`/api/tickets`, {
+            formData: {
+              title: formData.title,
+              description: formData.description,
+              priority: formData.priority,
+              status: formData.status,
+              active: formData.active,
+              category: formData.category,
+              progress: formData.progress,
+            },
+          })
+          .then((res) => {
+            if (res.statusText !== "Created") {
+              throw new Error("Failed to create tickets");
+            }
+            console.log(res);
+            router.push("/");
+          });
+      }
     } catch (error) {
       console.log(error);
     }
