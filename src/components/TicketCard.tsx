@@ -9,6 +9,7 @@ const TicketCard = ({
   ticket,
 }: {
   ticket: {
+    _id: string;
     title: string;
     description: string;
     priority: number;
@@ -28,7 +29,7 @@ const TicketCard = ({
       <div className="flex mb-3">
         <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">
-          <DeleteBlock />
+          <DeleteBlock _id={ticket._id} />
         </div>
       </div>
       <h4 className="text-white">{ticket.title}</h4>

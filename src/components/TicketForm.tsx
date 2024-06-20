@@ -104,7 +104,6 @@ const TicketForm = (props: Props) => {
                 name="priority"
                 onChange={handleChange}
                 value={1}
-                className=""
                 checked={formData.priority == 1}
               />
               <label htmlFor="">1</label>
@@ -113,7 +112,6 @@ const TicketForm = (props: Props) => {
                 name="priority"
                 onChange={handleChange}
                 value={2}
-                className=""
                 checked={formData.priority == 2}
               />
               <label htmlFor="">2</label>
@@ -122,7 +120,6 @@ const TicketForm = (props: Props) => {
                 name="priority"
                 onChange={handleChange}
                 value={3}
-                className=""
                 checked={formData.priority == 3}
               />
               <label htmlFor="">3</label>
@@ -131,7 +128,6 @@ const TicketForm = (props: Props) => {
                 name="priority"
                 onChange={handleChange}
                 value={4}
-                className=""
                 checked={formData.priority == 4}
               />
               <label htmlFor="">4</label>
@@ -140,7 +136,6 @@ const TicketForm = (props: Props) => {
                 name="priority"
                 onChange={handleChange}
                 value={5}
-                className=""
                 checked={formData.priority == 5}
               />
               <label htmlFor="">5</label>

@@ -7,6 +7,9 @@ const PriorityDisplay = ({ priority }: { priority: number }) => {
   return (
     <div className="flex gap-2">
       <FaFire
+        className={`${priority > 0 ? "text-red-500" : "text-slate-400"}`}
+      />
+      <FaFire
         className={`${priority > 1 ? "text-red-500" : "text-slate-400"}`}
       />
       <FaFire
@@ -17,9 +20,6 @@ const PriorityDisplay = ({ priority }: { priority: number }) => {
       />
       <FaFire
         className={`${priority > 4 ? "text-red-500" : "text-slate-400"}`}
-      />
-      <FaFire
-        className={`${priority > 5 ? "text-red-500" : "text-slate-400"}`}
       />
     </div>
   );
