@@ -36,7 +36,7 @@ export default async function Home() {
           </h2>
           <div
             key={category}
-            className="gap-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
+            className="gap-6 my-4 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
           >
             {tickets.map((ticket: Ticket, index: number) => (
               <TicketCard ticket={ticket} key={index} />

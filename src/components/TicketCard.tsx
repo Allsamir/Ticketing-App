@@ -11,7 +11,7 @@ const TicketCard = ({
   ticket: {
     title: string;
     description: string;
-    priority?: number;
+    priority: number;
     status?: string;
     active?: boolean;
     category?: string;
