@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-type Props = {};
+import Ticket from "@/interface/TicketInterface";
+type Props = {
+  updateTicketData: Ticket;
+};
 
-const TicketForm = (props: Props) => {
+const TicketForm = ({ updateTicketData }: Props) => {
+  const EDITMODE = updateTicketData._id !== "new";
   const router = useRouter();
-  const startingData = {
+  const startingData: Ticket = {
     title: "",
     description: "",
     priority: 1,
@@ -14,6 +18,14 @@ const TicketForm = (props: Props) => {
     progress: 0,
     category: "Hello",
   };
+  if (EDITMODE) {
+    startingData.title = updateTicketData.title;
+    startingData.description = updateTicketData.description;
+    startingData.priority = updateTicketData.priority;
+    startingData.status = updateTicketData?.status;
+    startingData.progress = updateTicketData?.progress;
+    startingData.category = updateTicketData?.category;
+  }
   const [formData, setFormData] = useState(startingData);
   const handleChange = (
     event: React.ChangeEvent<
@@ -49,7 +61,7 @@ const TicketForm = (props: Props) => {
     <>
       <div className="flex justify-center w-full lg:w-1/2 md:w-4/5 mx-auto">
         <form className="card-body" onSubmit={handleSubmit}>
-          <h3>Create Your Ticket</h3>
+          <h3>{EDITMODE ? "Update" : "Create"} Your Ticket</h3>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Title</span>
@@ -172,7 +184,7 @@ const TicketForm = (props: Props) => {
           </div>
           <div className="form-control mt-6">
             <button className="btn btn-primary btn-custom">
-              Create Ticket
+              {EDITMODE ? "Update" : "Create"} Ticket
             </button>
           </div>
         </form>

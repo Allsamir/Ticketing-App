@@ -26,24 +26,25 @@ const groupTicketByCategory = (tickets: Ticket[]) => {
 export default async function Home() {
   const { tickets } = await getAllTheTickets();
   const groupedTickets = groupTicketByCategory(tickets);
-  console.log(Object.entries(groupedTickets));
   return (
     <main>
-      {Object.entries(groupedTickets).map(([category, tickets]) => (
-        <>
-          <h2 className="m-2">
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </h2>
-          <div
-            key={category}
-            className="gap-6 my-4 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
-          >
-            {tickets.map((ticket: Ticket, index: number) => (
-              <TicketCard ticket={ticket} key={index} />
-            ))}
-          </div>
-        </>
-      ))}
+      {Object.entries(groupedTickets).map(
+        ([category, tickets], index: number) => (
+          <>
+            <h2 className="m-2" key={index}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </h2>
+            <div
+              key={index}
+              className="gap-6 my-4 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
+            >
+              {tickets.map((ticket: Ticket, index: number) => (
+                <TicketCard ticket={ticket} key={index} />
+              ))}
+            </div>
+          </>
+        ),
+      )}
     </main>
   );
 }

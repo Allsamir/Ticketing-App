@@ -18,7 +18,7 @@ const Navbar = (props: Props) => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <Link href={`/ticket-page/new`}>
-            <button className="btn btn-custom">Tickets</button>
+            <button className="btn btn-custom">New Ticket</button>
           </Link>
         </ul>
       </div>

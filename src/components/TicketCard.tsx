@@ -4,23 +4,10 @@ import PriorityDisplay from "./PriorityDisplay";
 import ProgressDispaly from "./ProgressDispaly";
 import StausDisplay from "./StausDisplay";
 import moment from "moment";
+import Link from "next/link";
+import Ticket from "@/interface/TicketInterface";
 
-const TicketCard = ({
-  ticket,
-}: {
-  ticket: {
-    _id: string;
-    title: string;
-    description: string;
-    priority: number;
-    status?: string;
-    active?: boolean;
-    category?: string;
-    progress?: number;
-    createdAt?: Date;
-    updatedAt?: Date;
-  };
-}) => {
+const TicketCard = ({ ticket }: { ticket: Ticket }) => {
   return (
     <div
       className="flex flex-col bg-card hover:translate-y-4 rounded-md shadow-xl p-4 m-2"
@@ -32,21 +19,24 @@ const TicketCard = ({
           <DeleteBlock _id={ticket._id} />
         </div>
       </div>
-      <h4 className="text-white">{ticket.title}</h4>
-      <p className="whitespace-pre-wrap mt-2">{ticket.description}</p>
-      <div className="flex-grow"></div>
-      <div className="mt-2">
-        <p>
-          {moment(ticket.createdAt).format("MMMM Do YYYY")}{" "}
-          {moment(ticket.createdAt).format("LT")}
-        </p>
-      </div>
-      <div className="mt-2 flex items-center">
-        <ProgressDispaly progress={ticket.progress} />
-        <div>
-          <StausDisplay status={ticket.status} />
+      <Link href={`/ticket-page/${ticket._id}`} style={{ display: "contents" }}>
+        <h4 className="text-white">{ticket.title}</h4>
+        <p className="whitespace-pre-wrap mt-2">{ticket.description}</p>
+        <div className="flex-grow">
+          <div className="mt-2">
+            <p>
+              {moment(ticket.createdAt).format("MMMM Do YYYY")}{" "}
+              {moment(ticket.createdAt).format("LT")}
+            </p>
+          </div>
+          <div className="mt-2 flex items-center">
+            <ProgressDispaly progress={ticket.progress} />
+            <div>
+              <StausDisplay status={ticket.status} />
+            </div>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

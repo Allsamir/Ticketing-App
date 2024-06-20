@@ -1,11 +1,46 @@
 import TicketForm from "@/components/TicketForm";
+import Ticket from "@/interface/TicketInterface";
 import React from "react";
 
-const TicketPage = ({ params }: { params: { id: string } }) => {
+interface TicketApiResponse {
+  ticket: Ticket;
+}
+
+const defaultTicket: Ticket = {
+  _id: "new",
+  title: "",
+  description: "",
+  priority: 1,
+  status: "not started",
+  active: true,
+  category: "",
+  progress: 0,
+};
+
+const getDataToUpdate = async (id: string): Promise<TicketApiResponse> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/tickets/${id}`, {
+      cache: "no-store",
+    });
+    return res.json();
+  } catch (error) {
+    throw new Error("Somethin is wrong look for ticket-page");
+  }
+};
+
+const TicketPage = async ({ params }: { params: { id: string } }) => {
+  const EDITMODE = params.id !== "new";
+  let updateData: Ticket | undefined;
+  if (EDITMODE) {
+    const data = await getDataToUpdate(params.id);
+    updateData = data.ticket;
+    console.log(updateData);
+  } else {
+    updateData = defaultTicket;
+  }
   return (
     <>
-      <div></div>
-      <TicketForm />
+      <TicketForm updateTicketData={updateData} />
     </>
   );
 };

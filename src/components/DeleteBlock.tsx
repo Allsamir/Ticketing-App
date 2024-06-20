@@ -6,7 +6,7 @@ import { TiDelete } from "react-icons/ti";
 import { Modal } from "antd";
 
 type Props = {
-  _id: string;
+  _id?: string;
 };
 
 const DeleteBlock = (props: Props) => {
