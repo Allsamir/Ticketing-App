@@ -4,7 +4,7 @@ import Ticket from "@/interface/TicketInterface";
 const getAllTheTickets = async () => {
   try {
     const res = await fetch(
-      `https://ticketing-js7p6pvfu-allsamirs-projects.vercel.app/api/tickets`,
+      `https://ticketing-app-beta-beryl.vercel.app/api/tickets`,
       {
         cache: "no-store",
       },
