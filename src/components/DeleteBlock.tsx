@@ -6,7 +6,7 @@ type Props = {};
 const DeleteBlock = (props: Props) => {
   return (
     <div>
-      <TiDelete className="text-red-600 hover:text-red-400 text-xl" />
+      <TiDelete className="text-red-600 hover:text-red-400 text-3xl cursor-pointer" />
     </div>
   );
 };

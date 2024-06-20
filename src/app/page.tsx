@@ -1,4 +1,5 @@
 import TicketCard from "@/components/TicketCard";
+import Ticket from "@/interface/TicketInterface";
 
 const getAllTheTickets = async () => {
   try {
@@ -16,16 +17,8 @@ export default async function Home() {
   return (
     <main>
       <div className="gap-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
-        {tickets?.map((ticket, index) => (
-          <TicketCard
-            key={index}
-            id={ticket.id}
-            title={ticket.title}
-            description={ticket.description}
-            priority={ticket.priority}
-            status={ticket.status}
-            createdAt={ticket.createdAt}
-          />
+        {tickets?.map((ticket: Ticket, index: number) => (
+          <TicketCard ticket={ticket} key={index} />
         ))}
       </div>
     </main>

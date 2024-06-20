@@ -3,33 +3,47 @@ import DeleteBlock from "./DeleteBlock";
 import PriorityDisplay from "./PriorityDisplay";
 import ProgressDispaly from "./ProgressDispaly";
 import StausDisplay from "./StausDisplay";
+import moment from "moment";
 
-type Props = {};
-
-const TicketCard = (props: Props) => {
+const TicketCard = ({
+  ticket,
+}: {
+  ticket: {
+    title: string;
+    description: string;
+    priority?: number;
+    status?: string;
+    active?: boolean;
+    category?: string;
+    progress?: number;
+    createdAt?: Date;
+    updatedAt?: Date;
+  };
+}) => {
   return (
     <div
       className="flex flex-col bg-card hover:translate-y-4 rounded-md shadow-xl p-4 m-2"
       style={{ transition: ".5s" }}
     >
       <div className="flex mb-3">
-        <PriorityDisplay />
+        <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">
           <DeleteBlock />
         </div>
       </div>
-      <h4>Ticket Title</h4>
-      <p className="whitespace-pre-wrap mt-2">
-        This is the description of the ticket
-      </p>
+      <h4 className="text-white">{ticket.title}</h4>
+      <p className="whitespace-pre-wrap mt-2">{ticket.description}</p>
       <div className="flex-grow"></div>
       <div className="mt-2">
-        <p>5/12/2024 10.23AM</p>
+        <p>
+          {moment(ticket.createdAt).format("MMMM Do YYYY")}{" "}
+          {moment(ticket.createdAt).format("LT")}
+        </p>
       </div>
       <div className="mt-2 flex items-center">
-        <ProgressDispaly />
+        <ProgressDispaly progress={ticket.progress} />
         <div>
-          <StausDisplay />
+          <StausDisplay status={ticket.status} />
         </div>
       </div>
     </div>

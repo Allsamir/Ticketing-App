@@ -4,7 +4,7 @@ import React from "react";
 const TicketPage = ({ params }: { params: { id: string } }) => {
   return (
     <>
-      <div>TicketPage {params.id}</div>
+      <div></div>
       <TicketForm />
     </>
   );
