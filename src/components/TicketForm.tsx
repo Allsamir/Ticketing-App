@@ -52,8 +52,7 @@ const TicketForm = ({ updateTicketData }: Props) => {
             if (res.statusText !== "OK") {
               throw new Error("Failed to update tickets");
             }
-            console.log(res);
-            router.push("/");
+            if (res.data) router.push("/");
           });
       } else {
         await axios
