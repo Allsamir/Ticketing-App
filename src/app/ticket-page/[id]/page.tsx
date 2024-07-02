@@ -18,9 +18,12 @@ const defaultTicket: Ticket = {
 
 const getDataToUpdate = async (id: string): Promise<TicketApiResponse> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/tickets/${id}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets/${id}`,
+      {
+        cache: "no-store",
+      },
+    );
     return res.json();
   } catch (error) {
     throw new Error("Somethin is wrong look for ticket-page");

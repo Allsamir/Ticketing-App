@@ -14,7 +14,7 @@ const DeleteBlock = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const deleteTicket = async () => {
     const res = await axios.delete(
-      `http://localhost:3000/api/tickets/${props._id}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets/${props._id}`,
     );
     if (res.statusText === "OK") {
       router.refresh();

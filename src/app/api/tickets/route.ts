@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     const tickets = await Ticket.find();
-    return NextResponse.json({ tickets }, { status: 200 });
+    return NextResponse.json(tickets, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error has happend" }, { status: 500 });
   }

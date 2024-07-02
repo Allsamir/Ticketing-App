@@ -1,10 +1,11 @@
+export const dynamic = "force-dynamic";
 import TicketCard from "@/components/TicketCard";
 import Ticket from "@/interface/TicketInterface";
 
 const getAllTheTickets = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/tickets`, {
-      next: { revalidate: 2 },
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets`, {
+      cache: "no-store",
     });
     return res.json();
   } catch (error) {
@@ -24,15 +25,16 @@ const groupTicketByCategory = (tickets: Ticket[]) => {
 };
 
 export default async function Home() {
-  const { tickets = [] } = await getAllTheTickets();
+  const tickets = await getAllTheTickets();
   const groupedTickets = groupTicketByCategory(tickets);
   console.log(groupedTickets);
+  console.log(Object.entries(groupedTickets));
   return (
     <main>
       {Object.entries(groupedTickets).map(
         ([category, tickets], index: number) => (
           <>
-            <h2 className="m-2 capitalize" key={tickets[0]._id}>
+            <h2 className="m-2 capitalize" key={index}>
               {category}
             </h2>
             <div

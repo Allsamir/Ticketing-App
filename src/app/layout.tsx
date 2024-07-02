@@ -17,6 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="shortcut icon"
+          href="https://cdn.iconscout.com/icon/free/png-256/free-ticket-1855957-1574163.png?f=webp&w=256"
+          type="image"
+        />
+      </head>
       <body className={inter.className}>
         <Navbar />
         <div className="bg-page">{children}</div>
