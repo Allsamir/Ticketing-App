@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
-import TicketCard from "@/components/TicketCard";
+import Tickets from "@/components/Tickets";
 import Ticket from "@/interface/TicketInterface";
-
 const getAllTheTickets = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tickets`, {
@@ -37,14 +36,7 @@ export default async function Home() {
             <h2 className="m-2 capitalize" key={index}>
               {category}
             </h2>
-            <div
-              key={category}
-              className="gap-6 my-4 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2"
-            >
-              {tickets.map((ticket: Ticket, index: number) => (
-                <TicketCard ticket={ticket} key={index} />
-              ))}
-            </div>
+            <Tickets category={category} tickets={tickets} />
           </>
         ),
       )}
